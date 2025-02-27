@@ -1,0 +1,64 @@
+body {
+  background-color: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  margin-top: 70px;
+  padding: 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 15px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+.input-icon {
+  color: #e57373;
+}
+
+.button:hover {
+  background: darkred;
+}
+
+
+/*search bar */
+
+/* Add this to your general.css */
+
+.search-bar {
+  display: flex;
+  align-items: center; /* Center the icon and input vertically */
+  border: 1px solid rgb(41, 40, 40);/* Add a border to the search bar */
+  border-radius: 4px; /* Round the corners */
+  background-color: rgb(41, 40, 40);
+
+}
+
+.search-icon {
+  margin-right: 8px; /* Space between the icon and the input */
+  color: #898b8d; /* Change the color of the icon */
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+} 
+
+.search-input {
+  border: none; /* Remove the default border */
+  outline: none; /* Remove the outline on focus */
+  flex: 1; /* Allow the input to take the remaining space */
+  padding: 6px; /* Add some padding */
+  font-size: 16px; /* Font size for the input */
+  background-color: rgb(41, 40, 40);
+  color: rgb(246, 244, 244); 
+
+}
