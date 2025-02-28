@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import Dashboard from './components/Dashboard';
+import Dashboard from "./routes/dashboard/Dashboard";
 import Authentication from './routes/auth/Authentication';
 
 function App() {
