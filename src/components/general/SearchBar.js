@@ -1,22 +1,23 @@
-import React from 'react';
-import './general.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import the search icon
+import React, { useState } from "react";
+import "./general.css";
 
-const SearchBar = ({ title, setTitle }) => {
+const SearchBar = ({ title, setTitle, placeholder = "Search Movies" }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     const handleInput = (event) => {
         setTitle(event.target.value);
     };
 
     return (
-        <div className="search-bar">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" /> {/* Add the search icon */}
+        <div className={`search-bar ${isFocused ? "focused" : ""}`}>
             <input
                 type="text"
+                className="search-input"
+                placeholder={placeholder}
                 value={title}
                 onChange={handleInput}
-                placeholder="Search Movies"
-                className="search-input" // Add a class for styling
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
             />
         </div>
     );
