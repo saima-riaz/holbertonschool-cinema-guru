@@ -1,65 +1,42 @@
-import React, { useState } from 'react';
-import Input from './components/general/Input';
-import SelectInput from './components/general/SelectInput';
-import Button from './components/general/Button';
-import SearchBar from './components/general/SearchBar';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import axios from 'axios';
+import Dashboard from './components/Dashboard';
+import Authentication from './routes/auth/Authentication';
 
 function App() {
-    // State variables for controlled components
-    const [inputValue, setInputValue] = useState('');
-    const [selectValue, setSelectValue] = useState('');
-    const [searchTitle, setSearchTitle] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userUsername, setUserUsername] = useState('');
 
-    // Options for the SelectInput
-    const options = [
-        { value: 'Default', label: 'Default' },
-        { value: 'Lastest', label: 'Lastest' },
-        { value: 'Oldest', label: 'Oldest' },
-        { value: 'Highest Rated', label: 'Highest Rated' },
-        { value: 'Lowest Rated', label: 'Lowest Rated' },
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
 
-    ];
+    if (accessToken) {
+      axios.post('/api/auth/', {}, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+      .then(response => {
+        setIsLoggedIn(true);
+        setUserUsername(response.data.username);
+      })
+      .catch(error => {
+        console.error('Authentication failed:', error);
+        setIsLoggedIn(false);
+      });
+    }
+  }, []);
 
-    // Button click handler
-    const handleButtonClick = () => {
-        console.log('Button clicked!');
-        // You can add more logic here as needed
-    };
-
-    return (
-        <div className="App">
-            
-            {/* Search Bar */}
-            <SearchBar title={searchTitle} setTitle={setSearchTitle} />
-
-            {/* Input Field */}
-            <Input 
-                label="Username" 
-                type="text" 
-                value={inputValue} 
-                setValue={setInputValue} 
-                className="custom-input-class" 
-            />
-
-            {/* Select Input */}
-            <SelectInput 
-                label="Sort" 
-                options={options} 
-                value={selectValue} 
-                setValue={setSelectValue} 
-                className="custom-select-class" 
-            />
-
-            {/* Button */}
-            <Button 
-                label="Load More" 
-                onClick={handleButtonClick} 
-                className="custom-button-class" 
-            />
-        </div>
-    );
+  return (
+    <div className="App">
+      {isLoggedIn ? (
+        <Dashboard userUsername={userUsername} setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <Authentication setIsLoggedIn={setIsLoggedIn} setUserUsername={setUserUsername} />
+      )}
+    </div>
+  );
 }
 
 export default App;
