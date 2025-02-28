@@ -4,6 +4,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Button from "../../components/general/Button";
 
+
+
 const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
     const [_switch, setSwitch] = useState(true);
 
@@ -15,14 +17,22 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
                         label="Sign In"
                         className={_switch ? "active" : ""}
                         onClick={() => setSwitch(true)}
+                        
+                        
+                        
+                        
                     />
                     <Button
                         label="Sign Up"
                         className={!_switch ? "active" : ""}
                         onClick={() => setSwitch(false)}
+                        
+                        
+                        
                     />
                 </div>
-                <h2 className="auth-title">{_switch ? "Sign in" : "Sign up"} with your account</h2>
+                <h2 className="auth-title">
+                    {_switch ? "Sign in with your" : "Create a new"} account </h2>
                 {_switch ? (
                     <Login setIsLoggedIn={setIsLoggedIn} setUserUsername={setUserUsername} />
                 ) : (

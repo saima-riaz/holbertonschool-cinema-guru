@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./auth.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/general/Button";
 
 const Login = ({ setIsLoggedIn, setUserUsername }) => {
@@ -58,7 +58,7 @@ const Login = ({ setIsLoggedIn, setUserUsername }) => {
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <Button
                 label="Sign In"
-                icon={faKey}
+                icon={faKey, faPlus}
                 className="auth-button"
                 type="submit"
             />
